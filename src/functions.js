@@ -25,11 +25,16 @@ async function substitute(sentence) {
       // uncommon word
 
       // fetch the word from the dictionary API
-      const resp = await fetch(DICT_API + words[i]);
-      const data = await resp.json();
-      const meaning = data[0].meanings[0].definitions[0].definition;
+      try {
+        const resp = await fetch(DICT_API + words[i]);
+        const data = await resp.json();
+        console.log(data);
+        const meaning = data[0].meanings[0].definitions[0].definition;
 
-      newSentence.push("(" + meaning + ")");
+        newSentence.push("(" + meaning + ")");
+      } catch (e) {
+        console.log(e);
+      }
     }
   }
 
